@@ -1,0 +1,12 @@
+{
+  "header": {
+    "centre": "The DevOps Path: Build"
+  },
+  "footer": {
+    "left": "Hassan Nazar",
+    "right": "\u2295 RedBridge Technology AB"
+  },
+  "fade": {
+    "delay": 15
+  }
+}
