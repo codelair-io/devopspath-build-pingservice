@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        label 'maven'
+    }
+
+    environment {
+        VERSION = readMavenPom().getVersion()
+    }
+
+    stages {
+
+        stage('SCM Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/codelair-io/devopspath-build-pingservice.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh './mvnw clean install -DskipTests'
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                sh './mvnw test'
+            }
+        }
+    }
+}
