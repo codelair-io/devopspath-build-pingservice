@@ -1,7 +1,7 @@
 kind: BuildConfig
 apiVersion: v1
 metadata:
-  name: pingservice-pipeline
+  name: pingservice-pipeline-production
   labels:
     app: pingservice
     env: prod
@@ -18,4 +18,4 @@ spec:
   strategy:
     type: JenkinsPipeline
     jenkinsPipelineStrategy:
-      jenkinsfilePath: Jenkinsfile.prod
+      jenkinsfilePath: ci/Jenkinsfile.prod
