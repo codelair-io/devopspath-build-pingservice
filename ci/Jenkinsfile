@@ -62,7 +62,7 @@ pipeline {
         stage('Promote to STAGE?') {
             steps {
                 timeout(time: 30, unit: 'DAYS'){
-                    input message: "Promote to Production?"
+                    input message: "Promote to Staging?"
                 }
             }
         }
@@ -112,5 +112,6 @@ pipeline {
     // No current jenkins builder agent for maven w. Java 11
     // https://github.com/openshift/jenkins/pull/923
 // Running a s2i build from ci/cd on pingservice- gives access denied for serviceaccount
+    //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-development
     //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-staging
     //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-production

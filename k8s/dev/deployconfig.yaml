@@ -35,16 +35,16 @@ spec:
         deploymentconfig: pingservice
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/pingservice-development/pingservice@sha256:ddbfd599e556de29bef1a500ef0c2fefb212f7df96c62a06d5a413396cdff434
+      - image: docker-registry.default.svc:5000/pingservice-development/pingservice@sha256:81aac46a362d660ee975e19c3c6129359e26803992095fdfacafa775d0eafd6d
         imagePullPolicy: Always
         name: pingservice
         env:
-          - name: message
-            value: "Hello from Pingservice-development"
+        - name: message
+          value: "Hello from pingservice-development"
         ports:
-        - containerPort: 9080
-          protocol: TCP
         - containerPort: 9443
+          protocol: TCP
+        - containerPort: 9080
           protocol: TCP
         resources: {}
         terminationMessagePath: /dev/termination-log
