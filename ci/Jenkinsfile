@@ -91,6 +91,7 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
+                            openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:latest")
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:${VERSION}")
                         }
                     }
@@ -98,20 +99,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            archive "target/**/*"
-            junit 'target/surefire-reports/*.xml'
-        }
-    }
 }
-
-
-// Invalid target release java 11
-    // No current jenkins builder agent for maven w. Java 11
-    // https://github.com/openshift/jenkins/pull/923
-// Running a s2i build from ci/cd on pingservice- gives access denied for serviceaccount
-    //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-development
-    //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-staging
-    //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-production
