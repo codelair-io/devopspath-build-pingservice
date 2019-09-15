@@ -1,21 +1,11 @@
 vcentre centre
 
-                                            ╭━━━━┳╮╱╭┳━━━╮╭━━━┳━╮╱╭┳━━━╮
-                                            ┃╭╮╭╮┃┃╱┃┃╭━━╯┃╭━━┫┃╰╮┃┣╮╭╮┃
-                                            ╰╯┃┃╰┫╰━╯┃╰━━╮┃╰━━┫╭╮╰╯┃┃┃┃┃
-                                            ╱╱┃┃╱┃╭━╮┃╭━━╯┃╭━━┫┃╰╮┃┃┃┃┃┃
-                                            ╱╱┃┃╱┃┃╱┃┃╰━━╮┃╰━━┫┃╱┃┃┣╯╰╯┃
-                                            ╱╱╰╯╱╰╯╱╰┻━━━╯╰━━━┻╯╱╰━┻━━━╯
+% Defining DevOps:
 
-            ▀▀█▀▀ █░░█ █▀▀█ █▀▀▄ █░█ █▀▀ 　 █▀▀ █▀▀█ █▀▀█ 　 █▀▀█ ▀▀█▀▀ ▀▀█▀▀ █▀▀ █▀▀▄ █▀▀▄ ░▀░ █▀▀▄ █▀▀▀ █
-            ░▒█░░ █▀▀█ █▄▄█ █░░█ █▀▄ ▀▀█ 　 █▀▀ █░░█ █▄▄▀ 　 █▄▄█ ░░█░░ ░░█░░ █▀▀ █░░█ █░░█ ▀█▀ █░░█ █░▀█ ▀
-            ░▒█░░ ▀░░▀ ▀░░▀ ▀░░▀ ▀░▀ ▀▀▀ 　 ▀░░ ▀▀▀▀ ▀░▀▀ 　 ▀░░▀ ░░▀░░ ░░▀░░ ▀▀▀ ▀░░▀ ▀▀▀░ ▀▀▀ ▀░░▀ ▀▀▀▀ ▄
+- Reorganization around DevOps
 
-% Sources:
-* AWS CI/CD Whitepaper:
-    ~https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf~
-* Martin Fowler CI/CD:
-    ~https://martinfowler.com/articles/continuousIntegration.html~
-    ~https://martinfowler.com/tags/continuous delivery.html~
-* Jenkins Pipeline scripting:
-    ~https://jenkins.io/doc/book/pipeline/~
+- Aims to remove silos, seperating development and operations teams!
+
+- Encourages collaboration
+
+- Automation is a cornerstone of DevOps!

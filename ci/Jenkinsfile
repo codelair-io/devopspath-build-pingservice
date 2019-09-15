@@ -1,0 +1,22 @@
+pipeline {
+    agent {
+        label 'maven'
+    }
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                git 'https://github.com/codelair-io/devopspath-build-pingservice.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh './mvnw clean install'
+            }
+        }
+    }
+}
+
+// Invalid target release java 11
+    // No current jenkins builder agent for maven w. Java 11
+    // https://github.com/openshift/jenkins/pull/923
