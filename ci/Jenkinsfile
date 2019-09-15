@@ -52,7 +52,7 @@ pipeline {
                             def buildConfig = openshift.selector("bc", applicationName);
                             def build = buildConfig.startBuild("--from-dir . --namespace ${devEnvironmentName}");
                             build.logs("-f --namespace ${devEnvironmentName}");
-                            openshift.tag(${devEnvironmentName}/${applicationName}:latest, ${devEnvironmentName}/${applicationName}:${VERSION})
+                            openshift.tag("${devEnvironmentName}/${applicationName}:latest", "${devEnvironmentName}/${applicationName}:${VERSION}")
                         }
                     }
                 }
@@ -88,7 +88,7 @@ pipeline {
             script {
                 openshift.withCluster() {
                     openshift.withProject() {
-                        openshift.tag(${devEnvironmentName}/${applicationName}:${VERSION}, ${stageEnvironmentName}/${applicationName}:${VERSION})
+                        openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:${VERSION}")
                     }
                 }
             }
