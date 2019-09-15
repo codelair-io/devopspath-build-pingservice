@@ -8,7 +8,7 @@ metadata:
   labels:
     app: pingservice
   name: pingservice
-  selfLink: /oapi/v1/namespaces/pingservice-staging/deploymentconfigs/pingservice
+  selfLink: /oapi/v1/namespaces/pingservice-development/deploymentconfigs/pingservice
 spec:
   replicas: 1
   revisionHistoryLimit: 10
@@ -35,12 +35,12 @@ spec:
         deploymentconfig: pingservice
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/pingservice-staging/pingservice@sha256:ddbfd599e556de29bef1a500ef0c2fefb212f7df96c62a06d5a413396cdff434
+      - image: docker-registry.default.svc:5000/pingservice-development/pingservice@sha256:ddbfd599e556de29bef1a500ef0c2fefb212f7df96c62a06d5a413396cdff434
         imagePullPolicy: Always
         name: pingservice
         env:
           - name: message
-            value: "Hello from Pingservice-staging"
+            value: "Hello from Pingservice-development"
         ports:
         - containerPort: 9080
           protocol: TCP
@@ -64,7 +64,7 @@ spec:
       from:
         kind: ImageStreamTag
         name: pingservice:latest
-        namespace: pingservice-staging
+        namespace: pingservice-development
     type: ImageChange
 status:
   availableReplicas: 0

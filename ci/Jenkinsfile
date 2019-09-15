@@ -1,9 +1,14 @@
 def applicationName = "pingservice"
+def devEnvironmentName = "pingservice-development"
 def stageEnvironmentName = "pingservice-staging"
 
 pipeline {
     agent {
         label 'maven'
+    }
+
+    environment {
+        VERSION = readMavenPom().getVersion()
     }
 
     stages {
@@ -31,25 +36,68 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                            openshift.apply("-f k8s/stage/buildconfig.yaml --namespace ${stageEnvironmentName}")
-                            openshift.apply("-f k8s/stage/deployconfig.yaml --namespace ${stageEnvironmentName}")
+                            openshift.apply("-f k8s/dev/buildconfig.yaml --namespace ${devEnvironmentName}")
+                            openshift.apply("-f k8s/dev/deployconfig.yaml --namespace ${devEnvironmentName}")
                         }
                     }
                 }
             }
         }
 
-        stage('S2I Build') {
+        stage('Deploy to DEV') {
             steps {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
                             def buildConfig = openshift.selector("bc", applicationName);
-                            def build = buildConfig.startBuild("--from-dir . --namespace ${stageEnvironmentName}");
-                            build.logs("-f --namespace ${stageEnvironmentName}");
+                            def build = buildConfig.startBuild("--from-dir . --namespace ${devEnvironmentName}");
+                            build.logs("-f --namespace ${devEnvironmentName}");
+                            openshift.tag(${devEnvironmentName}/${applicationName}:latest, ${devEnvironmentName}/${applicationName}:${VERSION})
                         }
                     }
                 }
+            }
+        }
+
+        stage('Promote to STAGE?') {
+            timeout(time: 30, unit: 'DAYS'){
+                input message: "Promote to Production?"
+            }
+        }
+
+        stage('Integration Tests') {
+            steps {
+                sh './mvnw verify'
+            }
+        }
+
+        stage('Configure Environment') {
+            steps {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            openshift.apply("-f k8s/stage/buildconfig.yaml --namespace ${devEnvironmentName}")
+                            openshift.apply("-f k8s/stage/deployconfig.yaml --namespace ${devEnvironmentName}")
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Promote to STAGE') {
+            script {
+                openshift.withCluster() {
+                    openshift.withProject() {
+                        openshift.tag(${devEnvironmentName}/${applicationName}:${VERSION}, ${stageEnvironmentName}/${applicationName}:${VERSION})
+                    }
+                }
+            }
+        }
+
+        post {
+            always {
+                archive "target/**/*"
+                junit 'target/surefire-reports/*.xml'
             }
         }
     }
