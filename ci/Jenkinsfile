@@ -31,7 +31,7 @@ pipeline {
             }
         }
 
-        stage('Configure Environment') {
+        stage('Configure DEV Environment') {
             steps {
                 script {
                     openshift.withCluster() {
@@ -60,8 +60,10 @@ pipeline {
         }
 
         stage('Promote to STAGE?') {
-            timeout(time: 30, unit: 'DAYS'){
-                input message: "Promote to Production?"
+            steps {
+                timeout(time: 30, unit: 'DAYS'){
+                    input message: "Promote to Production?"
+                }
             }
         }
 
@@ -71,7 +73,7 @@ pipeline {
             }
         }
 
-        stage('Configure Environment') {
+        stage('Configure STAGE Environment') {
             steps {
                 script {
                     openshift.withCluster() {
@@ -85,10 +87,12 @@ pipeline {
         }
 
         stage('Promote to STAGE') {
-            script {
-                openshift.withCluster() {
-                    openshift.withProject() {
-                        openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:${VERSION}")
+            steps {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:${VERSION}")
+                        }
                     }
                 }
             }
