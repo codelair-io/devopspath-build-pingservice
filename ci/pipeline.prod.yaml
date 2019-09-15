@@ -1,21 +1,34 @@
-kind: BuildConfig
 apiVersion: v1
+kind: BuildConfig
 metadata:
-  name: pingservice-pipeline-production
+  creationTimestamp: null
   labels:
     app: pingservice
     env: prod
+  name: pingservice-pipeline-production
+  selfLink: /oapi/v1/namespaces/ci-cd/buildconfigs/pingservice-pipeline-production
 spec:
+  nodeSelector: {}
+  output: {}
+  postCommit: {}
   resources:
     requests:
       cpu: 500Mi
-      memory: 0.5G
+      memory: 500M
+  runPolicy: Serial
   source:
     git:
       ref: master
-      uri: "https://github.com/codelair-io/devopspath-build-pingservice.git"
+      uri: https://github.com/codelair-io/devopspath-build-pingservice.git
     type: Git
   strategy:
-    type: JenkinsPipeline
     jenkinsPipelineStrategy:
       jenkinsfilePath: ci/Jenkinsfile.prod
+    type: JenkinsPipeline
+  triggers:
+  - github:
+      secretReference:
+        name: pingservice-webhook-secret
+    type: GitHub
+status:
+  lastVersion: 2

@@ -1,21 +1,37 @@
-kind: BuildConfig
 apiVersion: v1
+kind: BuildConfig
 metadata:
-  name: pingservice-pipeline
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"BuildConfig","metadata":{"annotations":{},"labels":{"app":"pingservice","env":"dev-stage"},"name":"pingservice-pipeline","namespace":"ci-cd"},"spec":{"resources":{"requests":{"cpu":"500Mi","memory":"0.5G"}},"source":{"git":{"ref":"develop","uri":"https://github.com/codelair-io/devopspath-build-pingservice.git"},"type":"Git"},"strategy":{"jenkinsPipelineStrategy":{"jenkinsfilePath":"ci/Jenkinsfile"},"type":"JenkinsPipeline"}}}
+  creationTimestamp: null
   labels:
     app: pingservice
     env: dev-stage
+  name: pingservice-pipeline
+  selfLink: /oapi/v1/namespaces/ci-cd/buildconfigs/pingservice-pipeline
 spec:
+  nodeSelector: {}
+  output: {}
+  postCommit: {}
   resources:
     requests:
       cpu: 500Mi
-      memory: 0.5G
+      memory: 500M
+  runPolicy: SerialLatestOnly
   source:
     git:
       ref: develop
-      uri: "https://github.com/codelair-io/devopspath-build-pingservice.git"
+      uri: https://github.com/codelair-io/devopspath-build-pingservice.git
     type: Git
   strategy:
-    type: JenkinsPipeline
     jenkinsPipelineStrategy:
       jenkinsfilePath: ci/Jenkinsfile
+    type: JenkinsPipeline
+  triggers:
+  - github:
+      secretReference:
+        name: pingservice-webhook-secret
+    type: GitHub
+status:
+  lastVersion: 10
