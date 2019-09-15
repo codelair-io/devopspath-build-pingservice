@@ -78,8 +78,8 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                            openshift.apply("-f k8s/stage/buildconfig.yaml --namespace ${devEnvironmentName}")
-                            openshift.apply("-f k8s/stage/deployconfig.yaml --namespace ${devEnvironmentName}")
+                            openshift.apply("-f k8s/stage/buildconfig.yaml --namespace ${stageEnvironmentName}")
+                            openshift.apply("-f k8s/stage/deployconfig.yaml --namespace ${stageEnvironmentName}")
                         }
                     }
                 }
