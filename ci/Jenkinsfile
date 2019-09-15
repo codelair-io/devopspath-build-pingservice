@@ -1,22 +1,64 @@
+def applicationName = "pingservice"
+def stageEnvironmentName = "pingservice-staging"
+
 pipeline {
     agent {
         label 'maven'
     }
 
     stages {
+
         stage('SCM Checkout') {
             steps {
                 git 'https://github.com/codelair-io/devopspath-build-pingservice.git'
             }
         }
+
         stage('Build') {
             steps {
-                sh './mvnw clean install'
+                sh './mvnw clean install -DskipTests'
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                sh './mvnw test'
+            }
+        }
+
+        stage('Configure Environment') {
+            steps {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            openshift.apply("-f k8s/stage/buildconfig.yaml")
+                            openshift.apply("-f k8s/stage/deployconfig.yaml")
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('S2I Build') {
+            steps {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            def buildConfig = openshift.selector("bc", applicationName);
+                            def build = buildConfig.startBuild("--from-dir . --namespace ${stageEnvironmentName}");
+                            build.logs("-f --namespace ${stageEnvironmentName}");
+                        }
+                    }
+                }
             }
         }
     }
 }
 
+
 // Invalid target release java 11
     // No current jenkins builder agent for maven w. Java 11
     // https://github.com/openshift/jenkins/pull/923
+// Running a s2i build from ci/cd on pingservice-staging gives access denied for serviceaccount
+    //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-staging
+    //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-production
