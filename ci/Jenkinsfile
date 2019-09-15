@@ -66,7 +66,7 @@ pipeline {
         }
 
         stage('Integration Tests') {
-            steps {
+            steps {
                 sh './mvnw verify'
             }
         }
@@ -107,6 +107,6 @@ pipeline {
 // Invalid target release java 11
     // No current jenkins builder agent for maven w. Java 11
     // https://github.com/openshift/jenkins/pull/923
-// Running a s2i build from ci/cd on pingservice-staging gives access denied for serviceaccount
+// Running a s2i build from ci/cd on pingservice- gives access denied for serviceaccount
     //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-staging
     //oc policy add-role-to-group edit system:serviceaccounts:ci-cd -n pingservice-production
