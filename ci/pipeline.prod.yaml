@@ -4,7 +4,7 @@ metadata:
   name: pingservice-pipeline
   labels:
     app: pingservice
-    env: dev-stage
+    env: prod
 spec:
   resources:
     requests:
@@ -12,10 +12,10 @@ spec:
       memory: 0.5G
   source:
     git:
-      ref: develop
+      ref: master
       uri: "https://github.com/codelair-io/devopspath-build-pingservice.git"
     type: Git
   strategy:
     type: JenkinsPipeline
     jenkinsPipelineStrategy:
-      jenkinsfilePath: Jenkinsfile
+      jenkinsfilePath: Jenkinsfile.prod
