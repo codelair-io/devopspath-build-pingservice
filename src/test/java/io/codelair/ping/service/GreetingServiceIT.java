@@ -17,6 +17,7 @@ public class GreetingServiceIT
 
     @Test
     void getGreeting_shouldReturnCorrectGreetings(){
+        System.out.println("Calling " + SERVICE_URL + "/ping");
         given()
         .when()
             .get(SERVICE_URL + "/ping")

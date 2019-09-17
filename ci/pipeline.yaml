@@ -29,7 +29,7 @@ spec:
       jenkinsfilePath: ci/Jenkinsfile
       env:
       - name: SERVICE_URL
-        value: http://pingservice.pingservice-staging:9080/devops-build-pingservice
+        value: http://pingservice-pingservice-staging.e4ff.pro-eu-west-1.openshiftapps.com/devops-build-pingservice
     type: JenkinsPipeline
   triggers:
   - github:
