@@ -82,8 +82,8 @@ pipeline {
         stage('Promote to STAGE') {
             steps {
                 script {
-                    openshift.withCluster(${stageEnvironmentName}) {
-                        openshift.withProject() {
+                    openshift.withCluster() {
+                        openshift.withProject(stageEnvironmentName) {
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:latest")
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:${VERSION}")
 
