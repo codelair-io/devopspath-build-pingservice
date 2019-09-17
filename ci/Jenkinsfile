@@ -83,11 +83,11 @@ pipeline {
             steps {
                 script {
                     openshift.withCluster() {
-                        openshift.withProject("${stageEnvironmentName}") {
+                        openshift.withProject(stageEnvironmentName) {
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:latest")
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:${VERSION}")
 
-                            def connected = openshift.verifyService(${applicationName})
+                            def connected = openshift.verifyService(applicationName)
                             if (connected) {
                                 echo "Able to connect to ${applicationName}"
                             } else {
