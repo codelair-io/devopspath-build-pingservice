@@ -39,8 +39,12 @@ spec:
         imagePullPolicy: Always
         name: pingservice
         env:
-        - name: message
-          value: "Hello from pingservice-development"
+        - name: message_en
+          value: "Hello from "
+        - name: message_sv
+            value: "Hej från"
+        - name: message_es
+            value: "Hola soy"
         ports:
         - containerPort: 9443
           protocol: TCP

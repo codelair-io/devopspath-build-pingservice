@@ -1,43 +1,28 @@
 package io.codelair.ping.service;
 
-import io.codelair.ping.model.Greeting;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
-import java.util.Locale;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 /**
  *
  * @author Hassan Nazar, hassenasse @ github (2019)
  */
-@RunWith( Arquillian.class )
+@DisplayName("Integration-Testing GreetingService")
 public class GreetingServiceIT
 {
-    @Deployment
-    public static WebArchive createDeployment()
-    {
-        return ShrinkWrap.create( WebArchive.class )
-                .addClasses(
-                        GreetingService.class,
-                        Greeting.class
-                )
-                .addAsManifestResource( "test-microprofile-config.properties", "microprofile-config.properties" )
-                .addAsManifestResource( EmptyAsset.INSTANCE, "beans.xml" );
-    }
-
-    @Inject GreetingService service;
+    final static String SERVICE_URL = System.getenv( "SERVICE_URL" );
 
     @Test
-    public void getGreeting_shouldReturnCorrectGreetings(){
-        assertThat(service.getGreeting( Locale.ENGLISH )).isNotNull();
+    void getGreeting_shouldReturnCorrectGreetings(){
+        given()
+        .when()
+            .get(SERVICE_URL + "/ping")
+        .then()
+            .statusCode( 200 )
+            .body( "message", equalTo("Hello from pingservice-development") );
+
     }
 }

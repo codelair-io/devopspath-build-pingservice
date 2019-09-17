@@ -27,6 +27,9 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfilePath: ci/Jenkinsfile
+      env:
+      - name: SERVICE_URL
+        value: http://pingservice.pingservice-staging:9080/devops-build-pingservice
     type: JenkinsPipeline
   triggers:
   - github:

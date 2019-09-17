@@ -12,8 +12,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.ws.rs.NotFoundException;
-
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.when;
 

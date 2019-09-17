@@ -67,12 +67,6 @@ pipeline {
             }
         }
 
-        stage('Integration Tests') {
-            steps {
-                sh './mvnw verify'
-            }
-        }
-
         stage('Configure STAGE Environment') {
             steps {
                 script {
@@ -89,13 +83,26 @@ pipeline {
         stage('Promote to STAGE') {
             steps {
                 script {
-                    openshift.withCluster() {
+                    openshift.withCluster(${stageEnvironmentName}) {
                         openshift.withProject() {
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:latest")
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:${VERSION}")
+
+                            def connected = openshift.verifyService(${applicationName})
+                            if (connected) {
+                                echo "Able to connect to ${applicationName}"
+                            } else {
+                                echo "Unable to connect to ${applicationName}"
+                            }
                         }
                     }
                 }
+            }
+        }
+
+        stage('Run Integration tests') {
+            steps {
+                sh './mvnw failsafe:integration-test failsafe:verify'
             }
         }
     }
