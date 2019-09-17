@@ -23,7 +23,7 @@ public class GreetingServiceIT
             .get(SERVICE_URL + "/ping")
         .then()
             .statusCode( 200 )
-            .body( "message", equalTo("Hello from pingservice-development") );
+            .body( "message", equalTo("Hello from Pingservice-staging") );
 
     }
 }
