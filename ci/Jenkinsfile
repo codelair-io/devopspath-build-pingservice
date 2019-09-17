@@ -83,7 +83,7 @@ pipeline {
             steps {
                 script {
                     openshift.withCluster() {
-                        openshift.withProject(stageEnvironmentName) {
+                        openshift.withProject("${stageEnvironmentName}") {
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:latest")
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:${VERSION}")
 
@@ -93,6 +93,10 @@ pipeline {
                             } else {
                                 echo "Unable to connect to ${applicationName}"
                             }
+
+                            def dc = openshift.selector('dc', "${applicationName}")
+                            // this will wait until the desired replicas are available
+                            dc.rollout().status()
                         }
                     }
                 }
