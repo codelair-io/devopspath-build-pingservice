@@ -87,12 +87,9 @@ pipeline {
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:latest")
                             openshift.tag("${devEnvironmentName}/${applicationName}:${VERSION}", "${stageEnvironmentName}/${applicationName}:${VERSION}")
 
-                            def connected = openshift.verifyService(${applicationName})
-                            if (connected) {
-                                echo "Able to connect to ${applicationName}"
-                            } else {
-                                echo "Unable to connect to ${applicationName}"
-                            }
+                           def dc = openshift.selector('dc', "${applicationName}")
+                           // this will wait until the desired replicas are available
+                           dc.rollout().status()
                         }
                     }
                 }
