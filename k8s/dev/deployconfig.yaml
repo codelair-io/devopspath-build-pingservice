@@ -40,11 +40,11 @@ spec:
         name: pingservice
         env:
         - name: message_en
-          value: "Hello from "
+          value: "Hello from"
         - name: message_sv
-            value: "Hej från"
+          value: "Hej från"
         - name: message_es
-            value: "Hola soy"
+          value: "Hola soy"
         ports:
         - containerPort: 9443
           protocol: TCP
