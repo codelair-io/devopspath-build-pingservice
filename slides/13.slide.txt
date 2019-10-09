@@ -4,7 +4,8 @@ vcentre centre
 
 [ ✅ ] Theory
 [  ] Introduce application source
-[  ] Create a ~CI-CD~ project on OpenShift.
+[  ] Create and configure projects on OpenShift.
+[  ] Simple deployment to DEV environment.
 [  ] Create a simple Jenkinsfile and add a OpenShift pipeline build
 [  ] Create TEST and PROD projects on OpenShift
 [  ] Finalize build
