@@ -1,24 +1,12 @@
 vcentre centre
 
-% Jenkinsfile Pipeline example:
+% Build:
 
-pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                //
-            }
-        }
-        stage('Test') {
-            steps {
-                //
-            }
-        }
-        stage('Deploy') {
-            steps {
-                //
-            }
-        }
-    }
-}
+┌────────────────┐ ┌──────────────┐ 
+│ Compiled files │ │ Dependencies │
+└───────────│────┘ └────────│─────┘
+┌───────────│───────────────│─────────┐
+│ ┌─────────v──────┐ ┌──────v───────┐ │ 
+│ │ Compiled files │ │ Dependencies │ │ JAR / WAR
+│ └────────────────┘ └──────────────┘ │
+└─────────────────────────────────────┘

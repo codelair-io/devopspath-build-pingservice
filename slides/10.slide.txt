@@ -1,0 +1,8 @@
+vcentre centre
+
+% Team responsibilities
+* Check in frequently
+* Don’t check in broken code
+* Don’t check in untested code
+* Don’t check in when the build is broken
+* Don’t go home after checking in until the system builds

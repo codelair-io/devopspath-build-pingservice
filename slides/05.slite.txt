@@ -1,0 +1,23 @@
+vcentre centre
+
+% Build Tool:
+
+~Typical Maven build process:~
+┌──────────┐ 
+│ Validate │ validate the project is correct and all necessary information is available
+└───│──────┘ 
+┌───v─────┐ 
+│ Compile │ compile the source code of the project
+└───│─────┘ 
+┌───v──┐ 
+│ Test │ test the compiled source code using a suitable unit testing framework.
+└───│──┘ 
+┌───v─────┐ 
+│ Package │ take the compiled code and package it in its distributable format, such as a JAR.
+└───│─────┘ 
+┌───v─────┐ 
+│ Install │ install the package into the local repository, for use as a dependency in other projects locally
+└───│─────┘ 
+┌───v────┐ 
+│ Deploy │ done in the build environment, copies the final package to the remote repository for sharing with other developers.
+└────────┘ 

@@ -1,0 +1,22 @@
+vcentre centre
+
+% CI / CD
+~Continuous Integration:~
+"Practice where developers regularly merge their code changes to a central
+repository, after which automated tests are run. CI often refers to the 
+build or integration stage of the software release and requires an 
+automation component (e.g., a CI or build service)."
+
+~Continuous Delivery:~
+"Practice where code changes are automatically build, tested, and 
+prepared for production release. It ~expands on CI by deploying code 
+~changes to a testing environment, a production environment, or both~ after
+the build stage has been completed."
+
+- Can be fully automated, or partially with manual steps at critical points.
+
+~Continuous Deployment:~
+"Revisions are deployed to a production environment automatically without
+explicit approval from a developer, ~making the entire process automated~"
+
+~(Practicing Continuous Integration and Delivery - AWS Whitepaper)~

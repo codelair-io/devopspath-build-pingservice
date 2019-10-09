@@ -1,0 +1,12 @@
+vcentre centre
+
+% Continuous Integration Practices
+* Maintain a single source repository
+* Automate the build
+* Make your build self-testing
+* Every commit should build on an integration machine
+* Keep the build fast
+* Test in a clone of the production environment
+* Make it easy for anyone to get the latest executable version
+* Everyone can see what’s happening
+* Automate deployment

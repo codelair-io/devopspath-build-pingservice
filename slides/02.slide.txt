@@ -8,4 +8,6 @@ vcentre centre
 
 - Encourages collaboration
 
+- Fosters a culture of shared responsibility
+
 - Automation is a cornerstone of DevOps!

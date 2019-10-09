@@ -1,0 +1,10 @@
+vcentre centre
+
+% Continuous Delivery != Continuous Deployment
+
+1. Continuous Delivery is not about applying all changes to production
+
+2. Manual plumbing is allowed for Continuous Delivery
+
+3. Continuous Delivery automates technical validation of the Source, 
+Decision to go live becomes a business decision, not a technical one.

@@ -1,0 +1,20 @@
+vcentre centre
+
+% 🚀🚀🚀🚀🚀 DEMO 🚀🚀🚀🚀🚀🚀
+
+~Application~
+PingService
+- REST based service which returns a hello upon request
+- Built on Java SE 11 LTS and Eclipse MicroProfile
+- Built on Maven
+- Deployed on a multi-stage OpenShift environment
+
+~CI Server~
+Jenkins / Hudson
+- Scripted Pipeline build
+- Tight integration with OpenShift
+
+~Environments~
+┌─────────────────┐ ┌───────────────────┐ ┌──────────────────┐
+│ PingService-DEV │─> PingService-STAGE │─> PingService-PROD │
+└─────────────────┘ └───────────────────┘ └──────────────────┘

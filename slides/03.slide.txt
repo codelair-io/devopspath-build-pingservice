@@ -1,4 +1,17 @@
 vcentre centre
 
-% Build:
+% Compilation 101:
+                                                                  ┌──────────────────────────────┐
+                                                                  │               VM             │
+    ┌─────────────────────────────────┐   Compile  ┌─────────────┐│ Interpret ┌─────────────┐    │
+    │     ~public static void main ...~ │------------>  Byte Code  │------------> Machine Code│    │
+    │            ~def main(): ...~      │            └─────────────┘│  || JIT   └─────────────┘    │
+    └─────────────────────────────────┘                           └──────────────────────────────┘
 
+
+%Python:
+%python AwesomeApp.py 
+
+%Java:
+%javac AwesomeApp.java
+%java AwesomeApp
