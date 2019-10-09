@@ -5,9 +5,9 @@ pipeline {
 
     environment {
         VERSION = readMavenPom().getVersion()
-        APPNAME = readMavenPom().getArtifactId()
-        TESTENV = "${APPNAME}-TEST"
-        PRODENV = "${APPNAME}-PROD"
+        APPNAME = readMavenPom().getArtifactId().toLowerCase()
+        TESTENV = "${APPNAME}-test"
+        PRODENV = "${APPNAME}-prod"
     }
 
     stages {

@@ -6,7 +6,7 @@ vcentre centre
 [  ] Introduce application source
 [  ] Create and configure projects on OpenShift.
 [  ] Simple deployment to DEV environment.
-[  ] Create a simple Jenkinsfile and add a OpenShift pipeline build
-[  ] Create TEST and PROD projects on OpenShift
-[  ] Finalize build
+[  ] Create a simple Jenkinsfile and add a OpenShift pipeline build with WebHooks
+[  ] Script a full DEV/TEST pipeline
+[  ] Expand pipeline to production
 
