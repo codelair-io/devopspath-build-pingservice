@@ -5,7 +5,7 @@ vcentre centre
 ~Application~
 PingService
 - REST based service which returns a hello upon request
-- Built on Java SE 11 LTS and Eclipse MicroProfile
+- Built on Java SE 8 and Eclipse MicroProfile
 - Built on Maven
 - Deployed on a multi-stage OpenShift environment
 
