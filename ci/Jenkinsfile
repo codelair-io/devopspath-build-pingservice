@@ -3,9 +3,7 @@ pipeline {
         label 'maven'
     }
 
-    environment {
-    }
-
+    
     stages {
         stage('Build') {
             steps {
