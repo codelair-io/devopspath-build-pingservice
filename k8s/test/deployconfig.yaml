@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  generation: 1
+  labels:
+    app: pingservice
+  name: pingservice
+  selfLink: /oapi/v1/namespaces/pingservice-test/deploymentconfigs/pingservice
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: pingservice
+    deploymentconfig: pingservice
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        app: pingservice
+        deploymentconfig: pingservice
+    spec:
+      containers:
+      - image: docker-registry.default.svc:5000/pingservice-test/pingservice@sha256:36202485f0fa942b7e6721008073f505bde561c2dd2f1b81246092f534bc4d1b
+        imagePullPolicy: Always
+        name: pingservice
+        ports:
+        - containerPort: 9443
+          protocol: TCP
+        - containerPort: 9080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - pingservice
+      from:
+        kind: ImageStreamTag
+        name: pingservice:latest
+        namespace: pingservice-test
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
