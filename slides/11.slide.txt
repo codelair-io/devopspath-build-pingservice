@@ -15,6 +15,6 @@ Jenkins / Hudson
 - Tight integration with OpenShift
 
 ~Environments~
-┌─────────────────┐ ┌───────────────────┐ ┌──────────────────┐
-│ PingService-DEV │─> PingService-STAGE │─> PingService-PROD │
-└─────────────────┘ └───────────────────┘ └──────────────────┘
+┌───────────────────┐ ┌──────────────────┐
+│ PingService-TEST  │─> PingService-PROD │
+└───────────────────┘ └──────────────────┘

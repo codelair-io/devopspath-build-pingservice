@@ -1,0 +1,11 @@
+vcentre centre
+
+% Objectives:
+
+[ ✅ ] Theory
+[  ] Introduce application source
+[  ] Create a ~CI-CD~ project on OpenShift.
+[  ] Create a simple Jenkinsfile and add a OpenShift pipeline build
+[  ] Create TEST and PROD projects on OpenShift
+[  ] Finalize build
+
