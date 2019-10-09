@@ -16,8 +16,9 @@ pipeline {
             steps {
                 script {
                     openshift.withCluster() {
-                        openshift.withProject() {
-                            openshift.apply("-f k8s/prod/deployconfig.yaml --namespace ${PRODENV}")
+                        openshift.withProject("${PRODENV}") {
+                            openshift.apply("-f k8s/prod/deployconfig.yaml")
+                            openshift.apply(openshift.raw("apply -f k8s/prod/service.yaml").actions[0].out)
                         }
                     }
                 }
