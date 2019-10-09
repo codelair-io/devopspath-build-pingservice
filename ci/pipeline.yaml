@@ -4,7 +4,7 @@ metadata:
   labels:
     app: PingService
     env: TEST
-  name: PingService-Pipeline-Test
+  name: pingservice-pipeline-test
 spec:
   nodeSelector: {}
   output: {}
