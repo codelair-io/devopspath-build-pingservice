@@ -30,6 +30,9 @@ spec:
     spec:
       containers:
       - image: docker-registry.default.svc:5000/pingservice-dev/pingservice@sha256:36202485f0fa942b7e6721008073f505bde561c2dd2f1b81246092f534bc4d1b
+        env:
+          - name: message
+            value: Hello from DEV-ENVIRONMENT
         imagePullPolicy: Always
         name: pingservice
         ports:
